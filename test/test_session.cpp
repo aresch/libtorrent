@@ -100,7 +100,7 @@ TORRENT_TEST(session_stats)
 
 	TEST_EQUAL(stats.size(), lt::counters::num_counters);
 	// make sure every stat index is represented in the stats_metric vector
-	for (int i = 0; i < stats.size(); ++i)
+	for (int i = 0; i < int(stats.size()); ++i)
 	{
 		TEST_EQUAL(stats[i].value_index, i);
 	}
