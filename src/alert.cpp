@@ -1639,12 +1639,11 @@ namespace libtorrent {
 		snprintf(msg, sizeof(msg), "session stats (%d values): "
 			, int(sizeof(values)/sizeof(values[0])));
 		std::string ret = msg;
-		int first = 2;
+		bool first = true;
 		for (int i = 0; i < sizeof(values)/sizeof(values[0]); ++i)
 		{
-			char const* format_string = ", %" PRIu64 "";
-			snprintf(msg, sizeof(msg), format_string + first, values[i]);
-			first = 0;
+			snprintf(msg, sizeof(msg), first ? "%" PRIu64 : ", %" PRIu64, values[i]);
+			first = false;
 			ret += msg;
 		}
 		return ret;
