@@ -4388,17 +4388,8 @@ retry:
 		if (!m_alerts.should_post<log_alert>()) return;
 
 		char buf[1024];
-		int ret = vsnprintf(buf, sizeof(buf), fmt, v);
-		if (ret > sizeof(buf))
-		{
-			std::vector<char> buffer(ret + 1);
-			vsnprintf(&buffer[0], buffer.size(), fmt, v);
-			m_alerts.emplace_alert<log_alert>(&buffer[0]);
-		}
-		else
-		{
-			m_alerts.emplace_alert<log_alert>(buf);
-		}
+		vsnprintf(buf, sizeof(buf), fmt, v);
+		m_alerts.emplace_alert<log_alert>(buf);
 	}
 #endif
 
